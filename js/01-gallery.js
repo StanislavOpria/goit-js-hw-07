@@ -21,13 +21,15 @@ const galleryMarkup = galleryItems
 gallery.innerHTML = galleryMarkup;
 
 gallery.addEventListener("click", (event) => {
-  event.preventDefault();
-  const originalImageLink = event.target.getAttribute("data-source");
-  const instance = basicLightbox.create(`
+  if (event.target.getAttribute("data-source")) {
+    event.preventDefault();
+    const originalImageLink = event.target.getAttribute("data-source");
+    const instance = basicLightbox.create(`
     <img src="${originalImageLink}" width="400" height="300" alt="${event.target.alt}">
 `);
-  instanceShowImage = instance;
-  instance.show();
+    instanceShowImage = instance;
+    instance.show();
+  }
 });
 
 document.addEventListener("keydown", (event) => {
